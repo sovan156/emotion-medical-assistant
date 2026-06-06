@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Environment variables - NEVER push these
+backend/.env
+.env
+
+# Node modules - too large to push
+frontend/node_modules/
+
+# Database
+*.db
+*.sqlite
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.idea/
+.vscode/settings.json
+*.suo
+*.user
+
+# Logs
+*.log
+logs/
+
+# Model cache - too large
+*.bin
+*.pt
+__pycache__/
+.cache/
+
+# Uploaded files
+uploads/
