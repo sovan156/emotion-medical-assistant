@@ -58,3 +58,22 @@ async def root():
 @app.get("/api/health")
 async def health():
     return {"status": "healthy"}
+
+@app.get("/api/ollama/status")
+async def ollama_status():
+    """Check if Ollama and Gemma are ready."""
+    from app.services.ollama_service import ollama_service
+
+    server_running = ollama_service.is_available()
+    model_ready = ollama_service.is_model_available() if server_running else False
+
+    return {
+        "ollama_server": "running" if server_running else "not running",
+        "model": ollama_service.model,
+        "model_status": "ready" if model_ready else "not found",
+        "instructions": (
+            "Run 'ollama serve' to start server. "
+            "Run 'ollama pull gemma:2b' to download model."
+            if not server_running else "All good!"
+        )
+    }

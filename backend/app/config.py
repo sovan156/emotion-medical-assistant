@@ -12,8 +12,10 @@ class Settings(BaseSettings):
     MONGODB_URL: str = "mongodb://localhost:27017"
     DATABASE_NAME: str = "emotion_medical_assistant"
 
-    OPENAI_API_KEY: str = ""
-    OPENAI_MODEL: str = "gpt-3.5-turbo"
+    # Ollama settings (replaces OpenAI)
+    OLLAMA_BASE_URL: str = "http://localhost:11434"
+    OLLAMA_MODEL: str = "gemma:2b"
+    OLLAMA_TIMEOUT: int = 120
 
     HF_MODEL_NAME: str = "j-hartmann/emotion-english-distilroberta-base"
     WHISPER_MODEL_SIZE: str = "base"
@@ -25,7 +27,10 @@ class Settings(BaseSettings):
 
     @property
     def cors_origins(self) -> List[str]:
-        return [origin.strip() for origin in self.ALLOWED_ORIGINS.split(",")]
+        return [
+            origin.strip()
+            for origin in self.ALLOWED_ORIGINS.split(",")
+        ]
 
     class Config:
         env_file = ".env"
